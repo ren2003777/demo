@@ -1,14 +1,21 @@
 package com.example.demo;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
-@RestController
-
+@Controller
 public class DemoController {
-	@RequestMapping("/")
-	String home() {
-		return "Hello Spring Boot!";
+	@RequestMapping("/{num}")
+	public String index(@PathVariable int num, Model model) {
+		int sum = 0;
+		for(int i = 1 ; i <= num ; i++) {
+			sum += i;
+		}
+		model.addAttribute("msg", "sum=" + sum);
+		return "index";
 	}
+
 
 }
